@@ -6,13 +6,15 @@ public enum SpotlightSearch {
     private static let maxOutputBytes = 2_000_000
     private static let maxResults = 300
 
+    /// Matches names with a word starting with the text. A leading `*` (any substring) took 0.28 s per query instead of 0.07 s on this Mac,
+    /// and only adds mid-word hits like "tronica" in "elettronica", which the local index still finds for projects.
     public static func metadataQuery(for text: String) -> String {
         var escaped = ""
         for character in text {
             if "\\\"*?".contains(character) { escaped.append("\\") }
             escaped.append(character)
         }
-        return "kMDItemFSName == \"*\(escaped)*\"cd"
+        return "kMDItemFSName == \"\(escaped)*\"cdw"
     }
 
     /// Hides hidden folders, build output, the insides of bundles and `Library`, including iCloud Drive. Only cloud drives such as OneDrive stay.

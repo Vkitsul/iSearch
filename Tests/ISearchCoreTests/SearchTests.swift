@@ -201,7 +201,7 @@ private func folder(_ path: String, modified: Date? = nil, kind: SearchItem.Kind
     }
 
     @Test func `the query escapes what would break it`() {
-        #expect(SpotlightSearch.metadataQuery(for: #"a"b*c"#) == #"kMDItemFSName == "*a\"b\*c*"cd"#)
+        #expect(SpotlightSearch.metadataQuery(for: #"a"b*c"#) == #"kMDItemFSName == "a\"b\*c*"cdw"#)
     }
 
     @Test func `the name shown drops the localized suffix`() {
